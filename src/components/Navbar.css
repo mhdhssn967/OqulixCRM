@@ -3,7 +3,7 @@
    display: flex;
    background-color: rgb(46, 59, 83);
    align-items: center;
-   width: 300vw;
+   width: 100%;
 }
 .nav img{
    margin: 0% 0.5% 0% 1%;
