@@ -4,6 +4,7 @@ import { auth } from "../firebaseConfig"; // Import Firebase Auth
 import { useNavigate } from "react-router-dom"; // If using React Router
 import { Form, Button, Container, Alert } from "react-bootstrap"; // Bootstrap
 import login from '../assets/OQ.png'
+import './Login.css'
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -25,7 +26,7 @@ const Login = () => {
 
   return (
     <Container className="d-flex justify-content-center align-items-center vh-100">
-      <div className="w-50 w-md-100 p-5 rounded" style={{boxShadow:'0px 0px 50px black'}}>
+      <div className="loginDiv" style={{boxShadow:'0px 0px 50px black'}}>
         <div className="d-flex align-items-center justify-content-center flex-column">
          <img className="m-3" src={login} alt="" width={'70px'}/>   <h1 style={{fontWeight:'100'}}>Oqulix CRM</h1></div>
 
