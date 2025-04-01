@@ -25,7 +25,7 @@ const Login = () => {
 
   return (
     <Container className="d-flex justify-content-center align-items-center vh-100">
-      <div className="w-100 w-md-50 p-5 rounded" style={{boxShadow:'0px 0px 50px black'}}>
+      <div className="w-50 w-md-100 p-5 rounded" style={{boxShadow:'0px 0px 50px black'}}>
         <div className="d-flex align-items-center justify-content-center flex-column">
          <img className="m-3" src={login} alt="" width={'70px'}/>   <h1 style={{fontWeight:'100'}}>Oqulix CRM</h1></div>
 
