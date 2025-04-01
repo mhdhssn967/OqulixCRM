@@ -1,0 +1,34 @@
+.recordsTable tbody tr{
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: rgb(227, 240, 252);
+    height: 60px;
+}
+.recordsTable{
+    width: 95%;
+    margin: 2%;
+    background-color: rgb(179, 180, 182);
+
+}
+.recordsTable tbody tr:hover{
+    transform: scale(1.02);
+    transition: 0.3s;
+    background-color: rgb(227, 240, 252);
+}
+.recordsTable tbody tr td{
+    background-color: rgb(227, 240, 252);
+    color: black;
+}
+.loadingDiv img{
+    filter: invert(1);
+    animation: rotateLoading 1s linear infinite;
+}
+@keyframes rotateLoading {
+    0%{
+        transform: rotate(0);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+

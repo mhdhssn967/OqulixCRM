@@ -1,0 +1,129 @@
+import { addDoc, collection } from 'firebase/firestore';
+import { useState } from 'react';
+import { Form, FormControl, FormGroup, FormLabel, FormSelect } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import { auth, db } from '../firebaseConfig';
+import { logEvent } from 'firebase/analytics';
+
+
+const AddRecordModal = ({triggerRefresh, setTriggerRefresh}) => {
+
+    const [show, setShow] = useState(false);
+    const [records,setRecords]=useState({institutionName:"",personOfContact:"",representative:"",contactNo:"",associate:"",currentStatus:"",lastContacted:"",	nextFollowUp:"",	remarks:""})
+    console.log(records);
+    
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+ const handleSubmit=async(e)=>{
+  const {institutionName,personOfContact,representative,contactNo,associate,currentStatus,lastContacted,	nextFollowUp,	remarks}=records
+  e.preventDefault();
+    if(!institutionName || !personOfContact || !contactNo){
+      alert("Enter Required Fields")
+      return;
+        }
+        try{
+          await addDoc(collection(db, "records"),{
+            institutionName,
+            personOfContact,
+            representative,
+            contactNo,
+            currentStatus,
+            lastContacted,	
+            nextFollowUp,
+            remarks,
+            associate: auth.currentUser.uid, // Store BDA who added it
+            createdAt: new Date()
+          })
+
+        }catch(err){
+          console.log(err);
+        }
+  handleClose()
+  setTriggerRefresh(!triggerRefresh)
+ }
+
+
+    return (
+        <>
+            <button style={{margin:'1%'}} className='btn btn-secondary' onClick={handleShow}>Add New Record</button>
+            <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Add a new Record</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Form>
+          {/* Institution Name */}
+          <Form.Group className="mb-3">
+            <Form.Label>Institution Name</Form.Label>
+            <Form.Control type="text" placeholder="Enter Institution Name" onChange={(e)=>setRecords({...records,institutionName:e.target.value})} />
+          </Form.Group>
+
+          {/* Contact Person */}
+          <Form.Group className="mb-3">
+            <Form.Label>Contact Person</Form.Label>
+            <Form.Control type="text" placeholder="Enter Contact Person's Name" onChange={(e)=>setRecords({...records,personOfContact:e.target.value})}/>
+          </Form.Group>
+
+          {/* Representative */}
+          <Form.Group className="mb-3">
+            <Form.Label>Representative</Form.Label>
+            <Form.Control type="text" placeholder="Enter Representative's Name" onChange={(e)=>setRecords({...records,representative:e.target.value})}/>
+          </Form.Group>
+
+          {/* Contact Number */}
+          <Form.Group className="mb-3">
+            <Form.Label>Contact Number</Form.Label>
+            <Form.Control type="tel" placeholder="Enter Contact Number" onChange={(e)=>setRecords({...records,contactNo:e.target.value})}/>
+          </Form.Group>
+
+          {/* Status Dropdown */}
+          <Form.Group className="mb-3">
+            <Form.Label>Status</Form.Label>
+            <Form.Select onChange={(e)=>setRecords({...records,currentStatus:e.target.value})}>
+              <option value="" disabled selected>Select Status</option>
+              <option value="New Lead">New Lead</option>
+              <option value="Contacted">Contacted</option>
+              <option value="Interested">Interested</option>
+              <option value="Follow up needed">Follow-Up Needed</option>
+              <option value="Quotation Sent">Quotation Sent</option>
+              <option value="Awaiting Decision">Awaiting Decision</option>
+              <option value="Deal Closed">Converted (Deal Won)</option>
+              <option value="Deal Lost">Not Interested (Deal Lost)</option>
+            </Form.Select>
+          </Form.Group>
+
+          {/* Last Contacted Date */}
+          <Form.Group className="mb-3">
+            <Form.Label>Last Contacted</Form.Label>
+            <Form.Control type="date" onChange={(e)=>setRecords({...records,lastContacted:e.target.value})}/>
+          </Form.Group>
+
+          {/* Next Follow-Up Date */}
+          <Form.Group className="mb-3">
+            <Form.Label>Next Follow-Up</Form.Label>
+            <Form.Control type="date" onChange={(e)=>setRecords({...records,nextFollowUp:e.target.value})}/>
+          </Form.Group>
+
+          {/* Remarks */}
+          <Form.Group className="mb-3">
+            <Form.Label>Remarks</Form.Label>
+            <Form.Control as="textarea" rows={3} placeholder="Enter any additional remarks" onChange={(e)=>setRecords({...records,remarks:e.target.value})}/>
+          </Form.Group>
+        </Form>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>
+          Close
+        </Button>
+        <Button variant="primary" onClick={handleSubmit}>
+          Add New Record
+        </Button>
+      </Modal.Footer>
+    </Modal>
+        </>
+    )
+}
+
+export default AddRecordModal
