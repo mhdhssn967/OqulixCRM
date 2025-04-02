@@ -3,6 +3,7 @@
     padding: 2%;
     width: 1300px;
     border-radius: 10px;
+    max-height: 85vh;
     
 
     position: fixed; /* Keeps it in place even when scrolling */
