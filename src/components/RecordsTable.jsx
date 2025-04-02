@@ -104,57 +104,59 @@ const RecordsTable = ({triggerRefresh, admin}) => {
     <div>
       {
         viewRecord==true&&<ViewRecord setViewRecord={setViewRecord} viewRecordData={viewRecordData}/>}
-      <Table striped bordered hover className="recordsTable">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Institution Name</th>
-            <th>Place</th>
-            <th>Country</th>
-            <th>Person of Contact</th>
-            <th>POC Designation</th>
-            <th>Contact No</th>
-            <th>Representative</th>
-            <th>Email</th>
-            <th>Associate</th>
-            <th>Status</th>
-            <th>First quoted Price</th>
-            <th>Final Agreed price</th>
-            <th>Last Contacted</th>
-            <th>Next Follow Up</th>
-            <th>Remarks</th>
-          </tr>
-        </thead>
-        <tbody>
-          {records.length > 0 ? (
-            records.map((record, index) => (
-              <tr key={index} onClick={()=>getViewRecord(record)}>
-                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{index + 1}</td>
-                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.institutionName}</td>
-                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.place}</td>
-                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.country}</td>
-                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.personOfContact}</td>
-                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.pocDesignation}</td>
-                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.contactNo}</td>
-                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.referralPerson}</td>
-                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.email}</td>
-                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{BDAnames[index] || 'loading...'}</td>
-                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.currentStatus}</td>
-                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.fPrice}</td>
-                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.lPrice}</td>
-                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.lastContacted}</td>
-                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.nextFollowUp}</td>
-                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.remarks}</td>
-              </tr>
-            ))
-          ) : (
+      <div className='tableMain'>
+        <Table striped bordered hover className="recordsTable">
+          <thead>
             <tr>
-              <td colSpan="10" style={{ textAlign: 'center' }}>No records found</td>
+              <th>#</th>
+              <th>Institution Name</th>
+              <th>Place</th>
+              <th>Country</th>
+              <th>Person of Contact</th>
+              <th>POC Designation</th>
+              <th>Contact No</th>
+              <th>Representative</th>
+              <th>Email</th>
+              <th>Associate</th>
+              <th>Status</th>
+              <th>First quoted Price</th>
+              <th>Final Agreed price</th>
+              <th>Last Contacted</th>
+              <th>Next Follow Up</th>
+              <th>Remarks</th>
             </tr>
-          )}
-        </tbody>
-      </Table>
-    </div>
+          </thead>
+          <tbody>
+            {records.length > 0 ? (
+              records.map((record, index) => (
+                <tr key={index} onClick={()=>getViewRecord(record)}>
+                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{index + 1}</td>
+                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.institutionName}</td>
+                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.place}</td>
+                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.country}</td>
+                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.personOfContact}</td>
+                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.pocDesignation}</td>
+                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.contactNo}</td>
+                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.referralPerson}</td>
+                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.email}</td>
+                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{BDAnames[index] || 'loading...'}</td>
+                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.currentStatus}</td>
+                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.fPrice}</td>
+                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.lPrice}</td>
+                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.lastContacted}</td>
+                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.nextFollowUp}</td>
+                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.remarks}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="10" style={{ textAlign: 'center' }}>No records found</td>
+              </tr>
+            )}
+          </tbody>
+        </Table>
+      </div>
+      </div>
   );
 };
 
