@@ -14,7 +14,7 @@ const RecordsTable = ({triggerRefresh, admin}) => {
   const today = new Date();
   const formattedDate = today.toISOString().split('T')[0]; // YYYY-MM-DD format
   
-    
+  const [updateTable,setUpdateTable]=useState(false)
   const [viewRecord,setViewRecord] = useState(false)
   const [viewRecordData,setViewRecordData]=useState({})
   const [records, setRecords] = useState([]);
@@ -47,7 +47,7 @@ const RecordsTable = ({triggerRefresh, admin}) => {
     });
 
     return () => unsubscribe();
-  }, [triggerRefresh]);
+  }, [triggerRefresh,updateTable]);
 
 
   useEffect(() => {
@@ -69,7 +69,6 @@ const RecordsTable = ({triggerRefresh, admin}) => {
   const fetchChilds = async () => {
     try {
       const childBDAids = await fetchChildBDAs();
-      console.log("Child BDAs:", childBDAids);
   
       if (childBDAids.length === 0) return; // No child BDAs, exit early
   
@@ -103,7 +102,7 @@ const RecordsTable = ({triggerRefresh, admin}) => {
   return (
     <div>
       {
-        viewRecord==true&&<ViewRecord setViewRecord={setViewRecord} viewRecordData={viewRecordData}/>}
+        viewRecord==true&&<ViewRecord setViewRecord={setViewRecord} viewRecordData={viewRecordData} setUpdateTable={setUpdateTable} updateTable={updateTable}/>}
       <div className='tableMain'>
         <Table striped bordered hover className="recordsTable">
           <thead>
@@ -129,7 +128,7 @@ const RecordsTable = ({triggerRefresh, admin}) => {
           <tbody>
             {records.length > 0 ? (
               records.map((record, index) => (
-                <tr key={index} onClick={()=>getViewRecord(record)}>
+                <tr key={record.id} onClick={()=>getViewRecord(record)}>
                   <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{index + 1}</td>
                   <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.institutionName}</td>
                   <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.place}</td>
@@ -145,7 +144,7 @@ const RecordsTable = ({triggerRefresh, admin}) => {
                   <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.lPrice}</td>
                   <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.lastContacted}</td>
                   <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.nextFollowUp}</td>
-                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.remarks}</td>
+                  <td id='remarkTD' className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.remarks}</td>
                 </tr>
               ))
             ) : (

@@ -1,8 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './ViewRecord.css'
 import close from '../assets/close.png'
+import getBDAName from '../services/fetchNames'
+import { deleteRecord } from '../services/deleteRecords'
 
-const ViewRecord = ({setViewRecord, viewRecordData}) => {
+const ViewRecord = ({setViewRecord, viewRecordData, setUpdateTable, updateTable}) => {
+
+  const [bdaName, setBdaName]=useState("")
+
+  useEffect(() => {
+    const fetchBDAName = async () => {
+      if (!viewRecordData?.associate) return; // Prevent errors 
+      const BDAname = await getBDAName(viewRecordData.associate);
+      setBdaName(BDAname);
+    };
+    fetchBDAName();
+  }, [viewRecordData]);
+
+  const handleDeleteRecord = async (data) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this record?");
+    
+    if (confirmDelete) {
+      await deleteRecord(data);
+      setViewRecord(false)
+      setUpdateTable(!updateTable)
+    }
+  };
+  
+  
+
   return (
     <>
       <div className='viewRecord'>
@@ -15,7 +41,7 @@ const ViewRecord = ({setViewRecord, viewRecordData}) => {
           <h2>Initial Date : <span>{viewRecordData.date}</span></h2>
         </div>
         <div className='det'>
-          <h2>Associate : <span>{viewRecordData.associate}</span></h2>
+          <h2>Associate : <span>{bdaName}</span></h2>
           <h2>Status : <span>{viewRecordData.currentStatus}</span></h2>
         </div>
         <div className='det'>
@@ -43,7 +69,7 @@ const ViewRecord = ({setViewRecord, viewRecordData}) => {
 
        <div className='btn-div' style={{display:'flex',justifyContent:'right',backgroundColor:'red !important'}}>
           <button className='btn btn-primary'> Edit Record</button>
-          <button className='btn btn-danger'> Delete Record</button>
+          <button className='btn btn-danger' onClick={()=>handleDeleteRecord(viewRecordData.id)}> Delete Record</button>
   
        </div>
       </div>

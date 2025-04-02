@@ -44,3 +44,9 @@
 .tableMain::-webkit-scrollbar {
     display: none; /* Chrome, Safari */
 }
+#remarkTD{
+    max-width: 150px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
