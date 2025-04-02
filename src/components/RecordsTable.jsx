@@ -109,11 +109,12 @@ const RecordsTable = ({triggerRefresh, admin}) => {
           <tr>
             <th>#</th>
             <th>Institution Name</th>
+            <th>Place</th>
+            <th>Country</th>
             <th>Person of Contact</th>
             <th>POC Designation</th>
-            <th>Representative</th>
-            <th>Rep Designation</th>
             <th>Contact No</th>
+            <th>Representative</th>
             <th>Email</th>
             <th>Associate</th>
             <th>Status</th>
@@ -130,11 +131,12 @@ const RecordsTable = ({triggerRefresh, admin}) => {
               <tr key={index} onClick={()=>getViewRecord(record)}>
                 <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{index + 1}</td>
                 <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.institutionName}</td>
+                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.place}</td>
+                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.country}</td>
                 <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.personOfContact}</td>
                 <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.pocDesignation}</td>
-                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.representative}</td>
-                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.repDesignation}</td>
                 <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.contactNo}</td>
+                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.referralPerson}</td>
                 <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.email}</td>
                 <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{BDAnames[index] || 'loading...'}</td>
                 <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.currentStatus}</td>

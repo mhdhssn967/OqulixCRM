@@ -11,14 +11,14 @@ import './AddRecordModal.css'
 const AddRecordModal = ({triggerRefresh, setTriggerRefresh}) => {
 
     const [show, setShow] = useState(false);
-    const [records,setRecords]=useState({date:"",institutionName:"",personOfContact:"",pocDesignation:"",representative:"",repDesignation:"",contactNo:"",email:"",associate:"",currentStatus:"",fPrice:"",lPrice:"",lastContacted:"",	nextFollowUp:"",	remarks:""})
+    const [records,setRecords]=useState({date:"",institutionName:"",place:"",country:"",personOfContact:"",pocDesignation:"",contactNo:"",referralPerson:"",email:"",associate:"",currentStatus:"",fPrice:"",lPrice:"",lastContacted:"",	nextFollowUp:"",	remarks:""})
     console.log(records);
     
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
  const handleSubmit=async(e)=>{
-  const {date,institutionName,personOfContact,pocDesignation,representative,repDesignation,contactNo,email,associate,currentStatus,fPrice,lPrice,lastContacted,nextFollowUp,remarks}=records
+  const {date,institutionName,place,country,personOfContact,pocDesignation,contactNo,referralPerson,email,associate,currentStatus,fPrice,lPrice,lastContacted,nextFollowUp,remarks}=records
   e.preventDefault();
     if(!institutionName || !personOfContact || !contactNo){
       alert("Enter Required Fields")
@@ -28,11 +28,12 @@ const AddRecordModal = ({triggerRefresh, setTriggerRefresh}) => {
           await addDoc(collection(db, "records"),{
             date,
             institutionName,
+            place,
+            country,
             personOfContact,
             pocDesignation,
-            representative,
-            repDesignation,
             contactNo,
+            referralPerson,
             email,
             currentStatus,
             fPrice,
@@ -55,7 +56,7 @@ const AddRecordModal = ({triggerRefresh, setTriggerRefresh}) => {
     return (
         <>
             <button style={{margin:'1%'}} className='btn btn-secondary' onClick={handleShow}>Add New Record</button>
-            <Modal show={show} onHide={handleClose} dialogClassName="custom-modal">
+            <Modal show={show} onHide={handleClose} dialogClassName="custom-modal" backdrop="static">
       <Modal.Header closeButton>
         <Modal.Title>Add a new Record</Modal.Title>
       </Modal.Header>
@@ -73,6 +74,18 @@ const AddRecordModal = ({triggerRefresh, setTriggerRefresh}) => {
             <Form.Control type="text" placeholder="Enter Institution Name" onChange={(e)=>setRecords({...records,institutionName:e.target.value})} />
           </Form.Group>
 
+          {/* Place */}
+          <Form.Group className="mb-3">
+            <Form.Label>Place</Form.Label>
+            <Form.Control type="text" placeholder="Enter Place of institution" onChange={(e)=>setRecords({...records,place:e.target.value})} />
+          </Form.Group>
+
+          {/* Country */}
+          <Form.Group className="mb-3">
+            <Form.Label>Country</Form.Label>
+            <Form.Control type="text" placeholder="Enter Country of instituion" onChange={(e)=>setRecords({...records,country:e.target.value})} />
+          </Form.Group>
+
           {/* Contact Person */}
           <Form.Group className="mb-3">
             <Form.Label>Contact Person*</Form.Label>
@@ -85,22 +98,16 @@ const AddRecordModal = ({triggerRefresh, setTriggerRefresh}) => {
             <Form.Control type="text" placeholder="Enter Contact Person's Designation" onChange={(e)=>setRecords({...records,pocDesignation:e.target.value})}/>
           </Form.Group>
 
-          {/* Representative */}
-          <Form.Group className="mb-3">
-            <Form.Label>Representative</Form.Label>
-            <Form.Control type="text" placeholder="Enter Representative's Name" onChange={(e)=>setRecords({...records,representative:e.target.value})}/>
-          </Form.Group>
-
-          {/* Designation */}
-          <Form.Group className="mb-3">
-            <Form.Label>Representative Designation</Form.Label>
-            <Form.Control type="text" placeholder="Enter Representative's Designation" onChange={(e)=>setRecords({...records,repDesignation:e.target.value})}/>
-          </Form.Group>
-
           {/* Contact Number */}
           <Form.Group className="mb-3">
             <Form.Label>Contact Number*</Form.Label>
             <Form.Control type="number" placeholder="Enter Contact Number" onChange={(e)=>setRecords({...records,contactNo:e.target.value})}/>
+          </Form.Group>
+
+          {/* Representative */}
+          <Form.Group className="mb-3">
+            <Form.Label>Referral</Form.Label>
+            <Form.Control type="text" placeholder="Enter Referral person's Name" onChange={(e)=>setRecords({...records,referralPerson:e.target.value})}/>
           </Form.Group>
 
           {/* Email */}

@@ -15,28 +15,29 @@ const ViewRecord = ({setViewRecord, viewRecordData}) => {
           <h2>Initial Date : <span>{viewRecordData.date}</span></h2>
         </div>
         <div className='det'>
-          <h2>Associate : <span>Sakeer</span></h2>
-          <h2>Status : <span>To contact</span></h2>
+          <h2>Associate : <span>{viewRecordData.associate}</span></h2>
+          <h2>Status : <span>{viewRecordData.currentStatus}</span></h2>
         </div>
         <div className='det'>
-          <h2>Person of contact : <span>Nandan Sir (Physio Head)</span></h2>
-          <h2>Contact No : <span><a href='tel:989877777'>989877777</a></span> </h2>
+          <h2>Person of contact : <span>{viewRecordData.personOfContact} ({viewRecordData.pocDesignation})</span></h2>
+          <h2>Contact No : <span><a href={'tel:'+viewRecordData.contactNo}>{viewRecordData.contactNo}</a></span> </h2>
         </div>
         <div className='det'>
-          <h2>Representative : <span>Mr. Anand (MDd)</span></h2>
-          <h2>Email ID : <span><a href='mailto:hospital@gmail.com'>hospital@gmail.com</a></span> </h2>
+          <h2>Referral person : <span>{viewRecordData.referralPerson}</span></h2>
+          <h2>Email ID : <span><a href={viewRecordData.email}>{viewRecordData.email}</a></span> </h2>
         </div>
         <div className='det'>
-          <h2>Initial Quotes Price : <span>$568888</span></h2>
-          <h2>Final Agreed Price : <span>$23344</span> </h2>
+          <h2>Initial Quotes Price : <span>₹{viewRecordData.fPrice}</span></h2>
+          <h2>Final Agreed Price : <span>₹{viewRecordData.lPrice}</span> </h2>
         </div>
         <div className='det'>
-          <h2>Last Contacted Date : <span>12-04-2025</span></h2>
-          <h2>Next Follow Up Date : <span>23-05-2025</span></h2>
+          <h2>Last Contacted Date : <span>{viewRecordData.lastContacted}</span></h2>
+          <h2>Next Follow Up Date : <span>{viewRecordData.nextFollowUp}</span></h2>
         </div>
         <div className='det'>
-          <h2>Remarks 
-            <span> : Lorem ipsum dolor sit amet consectetur adipisicing elit. In mollitia distinctio maxime ipsam accusamus, et, esse magni placeat vitae qui cupiditate praesentium facere eum itaque quibusdam voluptatum reprehenderit consequuntur temporibus.</span>
+          <h2>Remarks : <span>
+                {viewRecordData.remarks}
+            </span>
           </h2>
         </div>
 
