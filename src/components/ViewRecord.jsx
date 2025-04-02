@@ -2,7 +2,7 @@ import React from 'react'
 import './ViewRecord.css'
 import close from '../assets/close.png'
 
-const ViewRecord = ({setViewRecord}) => {
+const ViewRecord = ({setViewRecord, viewRecordData}) => {
   return (
     <>
       <div className='viewRecord'>
@@ -11,8 +11,8 @@ const ViewRecord = ({setViewRecord}) => {
           <img src={close} alt="" style={{width:'40px', filter:'invert(1)',alignSelf:'right'}} onClick={()=>setViewRecord(false)}/>
         </div>
         <div className='det'>
-          <h2>Institute Name : <span>Aster Medicity</span></h2>
-          <h2>Initial Date : <span>12-04-2024</span></h2>
+          <h2>Institute Name : <span>{viewRecordData.institutionName}</span></h2>
+          <h2>Initial Date : <span>{viewRecordData.date}</span></h2>
         </div>
         <div className='det'>
           <h2>Associate : <span>Sakeer</span></h2>

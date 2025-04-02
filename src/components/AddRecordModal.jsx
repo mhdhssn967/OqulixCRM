@@ -26,6 +26,7 @@ const AddRecordModal = ({triggerRefresh, setTriggerRefresh}) => {
         }
         try{
           await addDoc(collection(db, "records"),{
+            date,
             institutionName,
             personOfContact,
             pocDesignation,

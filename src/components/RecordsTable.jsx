@@ -16,6 +16,7 @@ const RecordsTable = ({triggerRefresh, admin}) => {
   
     
   const [viewRecord,setViewRecord] = useState(false)
+  const [viewRecordData,setViewRecordData]=useState({})
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
@@ -90,7 +91,10 @@ const RecordsTable = ({triggerRefresh, admin}) => {
     }
   };
   
-  
+  const getViewRecord=(record)=>{
+    setViewRecord(true)
+    setViewRecordData(record)
+  }
 
   if (loading) return <div className='loadingDiv' style={{display:'flex',alignItems:'center',justifyContent:'center'}}><h1 style={{textAlign:'center',margin:'10%'}}>Loading records <img src={loadingImg} width={'50px'} alt="image" /></h1></div>;
 
@@ -99,7 +103,7 @@ const RecordsTable = ({triggerRefresh, admin}) => {
   return (
     <div>
       {
-        viewRecord==true&&<ViewRecord setViewRecord={setViewRecord}/>}
+        viewRecord==true&&<ViewRecord setViewRecord={setViewRecord} viewRecordData={viewRecordData}/>}
       <Table striped bordered hover className="recordsTable">
         <thead>
           <tr>
@@ -123,7 +127,7 @@ const RecordsTable = ({triggerRefresh, admin}) => {
         <tbody>
           {records.length > 0 ? (
             records.map((record, index) => (
-              <tr key={index} onClick={()=>setViewRecord(true)}>
+              <tr key={index} onClick={()=>getViewRecord(record)}>
                 <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{index + 1}</td>
                 <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.institutionName}</td>
                 <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.personOfContact}</td>
