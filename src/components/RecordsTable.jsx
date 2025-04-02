@@ -98,8 +98,8 @@ const RecordsTable = ({triggerRefresh, admin}) => {
 
   return (
     <div>
-      {/* {
-        viewRecord==true&&<ViewRecord/>} */}
+      {
+        viewRecord==true&&<ViewRecord setViewRecord={setViewRecord}/>}
       <Table striped bordered hover className="recordsTable">
         <thead>
           <tr>
@@ -123,7 +123,7 @@ const RecordsTable = ({triggerRefresh, admin}) => {
         <tbody>
           {records.length > 0 ? (
             records.map((record, index) => (
-              <tr key={index} onClick={()=>setViewRecord(!viewRecord)}>
+              <tr key={index} onClick={()=>setViewRecord(true)}>
                 <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{index + 1}</td>
                 <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.institutionName}</td>
                 <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.personOfContact}</td>
