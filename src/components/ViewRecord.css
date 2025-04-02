@@ -25,6 +25,17 @@
     /* border-radius: 55px; */
     padding: 2%;
 }
+
+@media screen and (max-width: 768px) {
+    .viewRecord .det {
+        flex-direction: column;
+        align-items: flex-start; /* Align items to start for a stacked look */
+    }
+    .viewRecord{
+        width: 90%;
+    }
+}
+
 .head{
     display: flex;
     justify-content: space-between;
