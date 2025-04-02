@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { auth, db } from '../firebaseConfig';
 import { logEvent } from 'firebase/analytics';
+import './AddRecordModal.css'
 
 
 const AddRecordModal = ({triggerRefresh, setTriggerRefresh}) => {
@@ -53,7 +54,7 @@ const AddRecordModal = ({triggerRefresh, setTriggerRefresh}) => {
     return (
         <>
             <button style={{margin:'1%'}} className='btn btn-secondary' onClick={handleShow}>Add New Record</button>
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} dialogClassName="custom-modal">
       <Modal.Header closeButton>
         <Modal.Title>Add a new Record</Modal.Title>
       </Modal.Header>
