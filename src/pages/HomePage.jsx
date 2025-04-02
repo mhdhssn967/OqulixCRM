@@ -36,7 +36,6 @@ const HomePage = () => {
 
   
   const fetchAdmin=(UID)=>{
-    console.log("UID:",UID, adminId);
     
    UID==adminId?setAdmin(true):setAdmin(false)
   }

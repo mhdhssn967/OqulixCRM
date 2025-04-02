@@ -6,6 +6,7 @@ import './RecordsTable.css';
 import getBDAName from '../services/fetchNames';
 import fetchChildBDAs from '../services/fetchChildRecords';
 import loadingImg from '../assets/loading.png'
+import ViewRecord from './ViewRecord';
 const adminId = import.meta.env.VITE_ADMIN_ID
 
 const RecordsTable = ({triggerRefresh, admin}) => {
@@ -14,7 +15,7 @@ const RecordsTable = ({triggerRefresh, admin}) => {
   const formattedDate = today.toISOString().split('T')[0]; // YYYY-MM-DD format
   
     
-
+  const [viewRecord,setViewRecord] = useState(false)
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
@@ -97,16 +98,23 @@ const RecordsTable = ({triggerRefresh, admin}) => {
 
   return (
     <div>
+      {/* {
+        viewRecord==true&&<ViewRecord/>} */}
       <Table striped bordered hover className="recordsTable">
         <thead>
           <tr>
             <th>#</th>
             <th>Institution Name</th>
             <th>Person of Contact</th>
+            <th>POC Designation</th>
             <th>Representative</th>
+            <th>Rep Designation</th>
             <th>Contact No</th>
+            <th>Email</th>
             <th>Associate</th>
             <th>Status</th>
+            <th>First quoted Price</th>
+            <th>Final Agreed price</th>
             <th>Last Contacted</th>
             <th>Next Follow Up</th>
             <th>Remarks</th>
@@ -115,14 +123,19 @@ const RecordsTable = ({triggerRefresh, admin}) => {
         <tbody>
           {records.length > 0 ? (
             records.map((record, index) => (
-              <tr key={index}>
+              <tr key={index} onClick={()=>setViewRecord(!viewRecord)}>
                 <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{index + 1}</td>
                 <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.institutionName}</td>
                 <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.personOfContact}</td>
+                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.pocDesignation}</td>
                 <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.representative}</td>
+                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.repDesignation}</td>
                 <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.contactNo}</td>
-                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{BDAnames[index]}</td>
+                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.email}</td>
+                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{BDAnames[index] || 'loading...'}</td>
                 <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.currentStatus}</td>
+                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.fPrice}</td>
+                <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.lPrice}</td>
                 <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.lastContacted}</td>
                 <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.nextFollowUp}</td>
                 <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.remarks}</td>

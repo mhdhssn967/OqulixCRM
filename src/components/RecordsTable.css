@@ -1,6 +1,6 @@
 .recordsTable tbody tr{
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.1s;
     background-color: rgb(227, 240, 252);
     height: 60px;
 }
@@ -8,11 +8,17 @@
     width: 95%;
     margin: 2%;
     background-color: rgb(179, 180, 182);
-
+    
 }
 .recordsTable tbody tr:hover{
     transform: scale(1.02);
-    transition: 0.3s;
+    transition: 0.1s;
+    background-color: rgb(227, 240, 252);
+}
+
+.recordsTable tbody tr:active{
+    transform: scale(.99);
+    transition: 0.1s;
     background-color: rgb(227, 240, 252);
 }
 .recordsTable tbody tr td{

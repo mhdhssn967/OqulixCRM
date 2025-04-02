@@ -10,14 +10,14 @@ import { logEvent } from 'firebase/analytics';
 const AddRecordModal = ({triggerRefresh, setTriggerRefresh}) => {
 
     const [show, setShow] = useState(false);
-    const [records,setRecords]=useState({institutionName:"",personOfContact:"",representative:"",contactNo:"",associate:"",currentStatus:"",lastContacted:"",	nextFollowUp:"",	remarks:""})
+    const [records,setRecords]=useState({date:"",institutionName:"",personOfContact:"",pocDesignation:"",representative:"",repDesignation:"",contactNo:"",email:"",associate:"",currentStatus:"",fPrice:"",lPrice:"",lastContacted:"",	nextFollowUp:"",	remarks:""})
     console.log(records);
     
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
  const handleSubmit=async(e)=>{
-  const {institutionName,personOfContact,representative,contactNo,associate,currentStatus,lastContacted,	nextFollowUp,	remarks}=records
+  const {date,institutionName,personOfContact,pocDesignation,representative,repDesignation,contactNo,email,associate,currentStatus,fPrice,lPrice,lastContacted,nextFollowUp,remarks}=records
   e.preventDefault();
     if(!institutionName || !personOfContact || !contactNo){
       alert("Enter Required Fields")
@@ -27,9 +27,14 @@ const AddRecordModal = ({triggerRefresh, setTriggerRefresh}) => {
           await addDoc(collection(db, "records"),{
             institutionName,
             personOfContact,
+            pocDesignation,
             representative,
+            repDesignation,
             contactNo,
+            email,
             currentStatus,
+            fPrice,
+            lPrice,
             lastContacted,	
             nextFollowUp,
             remarks,
@@ -54,16 +59,28 @@ const AddRecordModal = ({triggerRefresh, setTriggerRefresh}) => {
       </Modal.Header>
       <Modal.Body>
         <Form>
+
+          {/* Date */}
+          <Form.Group className="mb-3">
+            <Form.Label>Date</Form.Label>
+            <Form.Control type="date" placeholder="Enter todays date" onChange={(e)=>setRecords({...records,date:e.target.value})} />
+          </Form.Group>
           {/* Institution Name */}
           <Form.Group className="mb-3">
-            <Form.Label>Institution Name</Form.Label>
+            <Form.Label>Institution Name*</Form.Label>
             <Form.Control type="text" placeholder="Enter Institution Name" onChange={(e)=>setRecords({...records,institutionName:e.target.value})} />
           </Form.Group>
 
           {/* Contact Person */}
           <Form.Group className="mb-3">
-            <Form.Label>Contact Person</Form.Label>
+            <Form.Label>Contact Person*</Form.Label>
             <Form.Control type="text" placeholder="Enter Contact Person's Name" onChange={(e)=>setRecords({...records,personOfContact:e.target.value})}/>
+          </Form.Group>
+
+          {/* Rep Designation */}
+          <Form.Group className="mb-3">
+            <Form.Label>Contact Person Designation</Form.Label>
+            <Form.Control type="text" placeholder="Enter Contact Person's Designation" onChange={(e)=>setRecords({...records,pocDesignation:e.target.value})}/>
           </Form.Group>
 
           {/* Representative */}
@@ -72,10 +89,22 @@ const AddRecordModal = ({triggerRefresh, setTriggerRefresh}) => {
             <Form.Control type="text" placeholder="Enter Representative's Name" onChange={(e)=>setRecords({...records,representative:e.target.value})}/>
           </Form.Group>
 
+          {/* Designation */}
+          <Form.Group className="mb-3">
+            <Form.Label>Representative Designation</Form.Label>
+            <Form.Control type="text" placeholder="Enter Representative's Designation" onChange={(e)=>setRecords({...records,repDesignation:e.target.value})}/>
+          </Form.Group>
+
           {/* Contact Number */}
           <Form.Group className="mb-3">
-            <Form.Label>Contact Number</Form.Label>
-            <Form.Control type="tel" placeholder="Enter Contact Number" onChange={(e)=>setRecords({...records,contactNo:e.target.value})}/>
+            <Form.Label>Contact Number*</Form.Label>
+            <Form.Control type="number" placeholder="Enter Contact Number" onChange={(e)=>setRecords({...records,contactNo:e.target.value})}/>
+          </Form.Group>
+
+          {/* Email */}
+          <Form.Group className="mb-3">
+            <Form.Label>Email</Form.Label>
+            <Form.Control type="email" placeholder="Enter Email ID" onChange={(e)=>setRecords({...records,email:e.target.value})}/>
           </Form.Group>
 
           {/* Status Dropdown */}
@@ -92,6 +121,18 @@ const AddRecordModal = ({triggerRefresh, setTriggerRefresh}) => {
               <option value="Deal Closed">Converted (Deal Won)</option>
               <option value="Deal Lost">Not Interested (Deal Lost)</option>
             </Form.Select>
+          </Form.Group>
+
+          {/* fPrice */}
+          <Form.Group className="mb-3">
+            <Form.Label>Quoted Price</Form.Label>
+            <Form.Control type="email" placeholder="Enter the first quoted price" onChange={(e)=>setRecords({...records,lPrice:e.target.value})}/>
+          </Form.Group>
+
+          {/* lPrice */}
+          <Form.Group className="mb-3">
+            <Form.Label>Last Agreed Price</Form.Label>
+            <Form.Control type="email" placeholder="Enter the agreed price" onChange={(e)=>setRecords({...records,fPrice:e.target.value})}/>
           </Form.Group>
 
           {/* Last Contacted Date */}
