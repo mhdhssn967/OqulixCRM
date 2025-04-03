@@ -27,6 +27,9 @@
     /* border-radius: 55px; */
     padding: 2%;
 }
+.viewRecord .det:hover{
+    filter: brightness(1.2);
+}
 
 @media screen and (max-width: 768px) {
     .viewRecord .det {

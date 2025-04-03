@@ -93,6 +93,26 @@ const ViewRecord = ({ setViewRecord, viewRecordData, setUpdateTable, updateTable
             )}
           </h2>
         </div>
+        <div className="det">
+          <h2>
+            Place :{" "}
+            {isEditing ? (
+              <input type="text" value={editedData.place} onChange={(e) => handleChange(e, "place")} />
+            ) : (
+              <span>{editedData.place}</span>
+            )}
+          </h2>
+          <h2>
+            Country :{" "}
+            {isEditing ? (
+              <input type="text" value={editedData.country} onChange={(e) => handleChange(e, "country")} />
+            ) : (
+              <span>
+                <span>{editedData.country}</span>
+              </span>
+            )}
+          </h2>
+        </div>
 
         <div className="det">
           <h2>
