@@ -154,13 +154,13 @@ const AddRecordModal = ({triggerRefresh, setTriggerRefresh}) => {
           {/* fPrice */}
           <Form.Group className="mb-3">
             <Form.Label>Quoted Price</Form.Label>
-            <Form.Control type="email" placeholder="Enter the first quoted price" onChange={(e)=>setRecords({...records,lPrice:e.target.value})}/>
+            <Form.Control type="number" placeholder="Enter the first quoted price" onChange={(e)=>setRecords({...records,lPrice:e.target.value})}/>
           </Form.Group>
 
           {/* lPrice */}
           <Form.Group className="mb-3">
             <Form.Label>Last Agreed Price</Form.Label>
-            <Form.Control type="email" placeholder="Enter the agreed price" onChange={(e)=>setRecords({...records,fPrice:e.target.value})}/>
+            <Form.Control type="number" placeholder="Enter the agreed price" onChange={(e)=>setRecords({...records,fPrice:e.target.value})}/>
           </Form.Group>
 
           {/* Last Contacted Date */}

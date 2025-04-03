@@ -121,7 +121,7 @@ const RecordsTable = ({triggerRefresh, admin}) => {
               <th>Associate</th>
               <th>Status</th>
               {/* <th>First quoted Price</th> */}
-              {/* <th>Final Agreed price</th> */}
+              <th>Final Agreed price</th>
               {/* <th>Last Contacted</th> */}
               <th>Next Follow Up</th>
               {/* <th>Remarks</th> */}
@@ -146,7 +146,7 @@ const RecordsTable = ({triggerRefresh, admin}) => {
                   <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{BDAnames[index] || 'loading...'}</td>
                   <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.currentStatus}</td>
                   {/* <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.fPrice}</td> */}
-                  {/* <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.lPrice}</td> */}
+                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.lPrice}</td>
                   {/* <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.lastContacted}</td> */}
                   <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.nextFollowUp}</td>
                   {/* <td id='remarkTD' className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.remarks}</td> */}

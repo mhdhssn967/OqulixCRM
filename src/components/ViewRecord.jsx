@@ -128,7 +128,7 @@ const ViewRecord = ({ setViewRecord, viewRecordData, setUpdateTable, updateTable
           <h2>
             Contact No :{" "}
             {isEditing ? (
-              <input type="text" value={editedData.contactNo} onChange={(e) => handleChange(e, "contactNo")} />
+              <input type="number" value={editedData.contactNo} onChange={(e) => handleChange(e, "contactNo")} />
             ) : (
               <span>
                 <a href={"tel:" + editedData.contactNo}>{editedData.contactNo}</a>
