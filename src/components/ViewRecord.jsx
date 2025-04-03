@@ -137,6 +137,30 @@ const ViewRecord = ({ setViewRecord, viewRecordData, setUpdateTable, updateTable
           </h2>
         </div>
 
+        { editedData.personOfContact2&&
+          <div className="det">
+          <h2>
+            Person of contact 2:{" "}
+            {isEditing ? (
+              <input type="text" value={editedData.personOfContact2} onChange={(e) => handleChange(e, "personOfContact2")} />
+            ) : (
+              <span>
+                {editedData.personOfContact2} 
+              </span>
+            )}
+          </h2>
+          <h2>
+            Contact No 2:{" "}
+            {isEditing ? (
+              <input type="text" value={editedData.contactNo2} onChange={(e) => handleChange(e, "contactNo")} />
+            ) : (
+              <span>
+                <a href={"tel:" + editedData.contactNo2}>{editedData.contactNo2}</a>
+              </span>
+            )}
+          </h2>
+        </div>}
+
         <div className="det">
           <h2>
             Referral person :{" "}

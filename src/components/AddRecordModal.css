@@ -1,4 +1,9 @@
 .custom-modal{
     width: 500px;
     max-width: 90vw;
+    height: 95vh;
+    overflow: scroll;
+}
+.custom-modal::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
 }

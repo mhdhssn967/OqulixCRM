@@ -1,4 +1,4 @@
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
 import { db, auth } from "../firebaseConfig";
 const adminId = import.meta.env.VITE_ADMIN_ID
 
@@ -14,9 +14,14 @@ export const fetchRecords = async (userID) => {
       return [];
     }
 
-    const q = query(collection(db, "records"), where("associate", "==", userID));
-    const querySnapshot = await getDocs(q);
+    // Query records where associate is the userID and sort by createdAt (latest first)
+    const q = query(
+      collection(db, "records"),
+      where("associate", "==", userID),
+      orderBy("createdAt", "desc")  //  Sorting by createdAt in descending order
+    );
 
+    const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   } catch (error) {
     console.error("Error fetching records:", error);
@@ -25,7 +30,7 @@ export const fetchRecords = async (userID) => {
 };
 
 export const fetchAdminRecords = async (userID) => {
-
+  // Check if the user is the admin
   if (userID !== adminId) {
     console.warn("Unauthorized access: Only admin can fetch all records.");
     return []; // Return an empty array
@@ -38,13 +43,17 @@ export const fetchAdminRecords = async (userID) => {
       return [];
     }
 
-    const querySnapshot = await getDocs(collection(db, "records"));
+    // Query all records, sorted by createdAt (latest first)
+    const q = query(
+      collection(db, "records"),
+      orderBy("createdAt", "desc")  // 🔥 Sorting by createdAt in descending order
+    );
 
+    const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   } catch (error) {
     console.error("Error fetching records:", error);
     return []; // Return an empty array on error
   }
 };
-
 

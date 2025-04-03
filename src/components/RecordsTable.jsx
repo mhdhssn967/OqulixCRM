@@ -110,19 +110,21 @@ const RecordsTable = ({triggerRefresh, admin}) => {
               <th>#</th>
               <th>Institution Name</th>
               <th>Place</th>
-              <th>Country</th>
+              {/* <th>Country</th> */}
               <th>Person of Contact</th>
-              <th>POC Designation</th>
+              {/* <th>POC Designation</th> */}
               <th>Contact No</th>
-              <th>Representative</th>
+              {/* <th>Second contact person</th> */}
+              {/* <th>Second contact person number</th> */}
+              {/* <th>Referral Person</th> */}
               <th>Email</th>
               <th>Associate</th>
               <th>Status</th>
-              <th>First quoted Price</th>
-              <th>Final Agreed price</th>
-              <th>Last Contacted</th>
+              {/* <th>First quoted Price</th> */}
+              {/* <th>Final Agreed price</th> */}
+              {/* <th>Last Contacted</th> */}
               <th>Next Follow Up</th>
-              <th>Remarks</th>
+              {/* <th>Remarks</th> */}
             </tr>
           </thead>
           <tbody>
@@ -132,19 +134,22 @@ const RecordsTable = ({triggerRefresh, admin}) => {
                   <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{index + 1}</td>
                   <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.institutionName}</td>
                   <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.place}</td>
-                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.country}</td>
+                  {/* <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.country}</td> */}
                   <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.personOfContact}</td>
-                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.pocDesignation}</td>
+                  {/* <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.pocDesignation}</td> */}
                   <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.contactNo}</td>
-                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.referralPerson}</td>
+                  {/* <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.personOfContact2}</td> */}
+                  {/* <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.contactNo2}</td> */}
+
+                  {/* <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.referralPerson}</td> */}
                   <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.email}</td>
                   <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{BDAnames[index] || 'loading...'}</td>
                   <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.currentStatus}</td>
-                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.fPrice}</td>
-                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.lPrice}</td>
-                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.lastContacted}</td>
+                  {/* <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.fPrice}</td> */}
+                  {/* <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.lPrice}</td> */}
+                  {/* <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.lastContacted}</td> */}
                   <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.nextFollowUp}</td>
-                  <td id='remarkTD' className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.remarks}</td>
+                  {/* <td id='remarkTD' className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.remarks}</td> */}
                 </tr>
               ))
             ) : (

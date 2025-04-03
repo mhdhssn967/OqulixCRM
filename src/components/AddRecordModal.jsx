@@ -11,14 +11,19 @@ import './AddRecordModal.css'
 const AddRecordModal = ({triggerRefresh, setTriggerRefresh}) => {
 
     const [show, setShow] = useState(false);
-    const [records,setRecords]=useState({date:"",institutionName:"",place:"",country:"",personOfContact:"",pocDesignation:"",contactNo:"",referralPerson:"",email:"",associate:"",currentStatus:"",fPrice:"",lPrice:"",lastContacted:"",	nextFollowUp:"",	remarks:""})
+    const [records,setRecords]=useState({date:"",institutionName:"",place:"",country:"",personOfContact:"",pocDesignation:"",contactNo:"",personOfContact2:"",contactNo2:"",referralPerson:"",email:"",associate:"",currentStatus:"",fPrice:"",lPrice:"",lastContacted:"",	nextFollowUp:"",	remarks:""})
     console.log(records);
     
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const openModal=()=>{
+      handleShow()
+      setRecords({date:"",institutionName:"",place:"",country:"",personOfContact:"",pocDesignation:"",contactNo:"",personOfContact2:"",contactNo2:"",referralPerson:"",email:"",associate:"",currentStatus:"",fPrice:"",lPrice:"",lastContacted:"",	nextFollowUp:"",	remarks:""})
+    }
+
  const handleSubmit=async(e)=>{
-  const {date,institutionName,place,country,personOfContact,pocDesignation,contactNo,referralPerson,email,associate,currentStatus,fPrice,lPrice,lastContacted,nextFollowUp,remarks}=records
+  const {date,institutionName,place,country,personOfContact,pocDesignation,contactNo,personOfContact2,contactNo2,referralPerson,email,associate,currentStatus,fPrice,lPrice,lastContacted,nextFollowUp,remarks}=records
   e.preventDefault();
     if(!institutionName || !personOfContact || !contactNo){
       alert("Enter Required Fields")
@@ -33,6 +38,8 @@ const AddRecordModal = ({triggerRefresh, setTriggerRefresh}) => {
             personOfContact,
             pocDesignation,
             contactNo,
+            personOfContact2,
+            contactNo2,
             referralPerson,
             email,
             currentStatus,
@@ -55,7 +62,7 @@ const AddRecordModal = ({triggerRefresh, setTriggerRefresh}) => {
 
     return (
         <>
-            <button style={{margin:'1%'}} className='btn btn-secondary' onClick={handleShow}>Add New Record</button>
+            <button style={{margin:'1%'}} className='btn btn-secondary' onClick={openModal}>Add New Record</button>
             <Modal show={show} onHide={handleClose} dialogClassName="custom-modal" backdrop="static">
       <Modal.Header closeButton>
         <Modal.Title>Add a new Record</Modal.Title>
@@ -102,6 +109,18 @@ const AddRecordModal = ({triggerRefresh, setTriggerRefresh}) => {
           <Form.Group className="mb-3">
             <Form.Label>Contact Number*</Form.Label>
             <Form.Control type="number" placeholder="Enter Contact Number" onChange={(e)=>setRecords({...records,contactNo:e.target.value})}/>
+          </Form.Group>
+
+          {/* Contact Person 2*/}
+          <Form.Group className="mb-3">
+            <Form.Label>Contact Person 2(optional)</Form.Label>
+            <Form.Control type="text" placeholder="Enter other contact Person's Name" onChange={(e)=>setRecords({...records,personOfContact2:e.target.value})}/>
+          </Form.Group>
+
+          {/* Contact Number 2*/}
+          <Form.Group className="mb-3">
+            <Form.Label>Contact person 2 Number*</Form.Label>
+            <Form.Control type="number" placeholder="Enter 2nd contact person Number" onChange={(e)=>setRecords({...records,contactNo2:e.target.value})}/>
           </Form.Group>
 
           {/* Representative */}
