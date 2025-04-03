@@ -85,7 +85,7 @@ setTotalRevenue(revenueTotal)
           <p>Pending Follow-ups : {pendingFollowUps.length}</p>
         </div>
         <div className='dashMain'>
-          <p>Follow ups in 2 days : {upcomingFollowUps.length}</p>
+          <p>Upcoming Follow Ups : {upcomingFollowUps.length}</p>
         </div>
         <div className='dashMain'>
           <p>Total Revenue from closed deals : {totalRevenue}</p>
