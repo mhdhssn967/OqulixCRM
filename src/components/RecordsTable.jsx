@@ -7,6 +7,7 @@ import getBDAName from '../services/fetchNames';
 import fetchChildBDAs from '../services/fetchChildRecords';
 import loadingImg from '../assets/loading.png'
 import ViewRecord from './ViewRecord';
+import { Badge } from 'react-bootstrap';
 const adminId = import.meta.env.VITE_ADMIN_ID
 
 const RecordsTable = ({triggerRefresh, admin}) => {
@@ -21,6 +22,29 @@ const RecordsTable = ({triggerRefresh, admin}) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [BDAnames,setBDAnames]=useState([])
+  const [associates, setAssociates] = useState([])
+  const [associateFilter, setAssociateFilter]=useState('all')
+  const [associateID,setAssociateID]=useState()
+  console.log('associate id',associateID);
+  
+  console.log('Associates',associates,'AssociatesFilter',associateFilter);
+  
+  
+  
+  useEffect(() => {
+    const uniqueAssociatesNames = [...new Set(BDAnames)];
+    setAssociates(uniqueAssociatesNames);
+  }, [BDAnames]);
+  
+    
+  const filterDisplay=(name)=>{
+    const uniqueAssociates = [...new Set(records.map(record => record.associate))];
+    console.log('unique',uniqueAssociates);
+    
+    setAssociateFilter(name)
+    setAssociateID(uniqueAssociates)
+  }
+
   useEffect(() => {
     const auth = getAuth();
 
@@ -104,6 +128,31 @@ const RecordsTable = ({triggerRefresh, admin}) => {
       {
         viewRecord==true&&<ViewRecord setViewRecord={setViewRecord} viewRecordData={viewRecordData} setUpdateTable={setUpdateTable} updateTable={updateTable}/>}
       <div className='tableMain'>
+       
+          <div className='tableSelect'>
+          {/* Associate Filter */}
+        <select name="" id="" onChange={(e)=>filterDisplay(e.target.value)}>
+          <option disabled>Select Associate</option>
+          <option value={'all'}>All</option>
+
+            {associates.length>0&&
+            associates.map((associate)=>
+              <option value={associate} key={associate}>
+                {associate}
+              </option>
+            )}
+          </select>
+
+          {/* Common filter */}
+          <select name="" id="">
+            <option disabled >Select Filter</option>
+          </select>
+
+          {/* Sort By */}
+          <select name="" id="">
+            <option disabled >Sort By</option>
+          </select>
+        </div>
         <Table striped bordered hover className="recordsTable">
           <thead>
             <tr>
@@ -131,25 +180,25 @@ const RecordsTable = ({triggerRefresh, admin}) => {
             {records.length > 0 ? (
               records.map((record, index) => (
                 <tr key={record.id} onClick={()=>getViewRecord(record)}>
-                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{index + 1}</td>
-                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.institutionName}</td>
-                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.place}</td>
-                  {/* <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.country}</td> */}
-                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.personOfContact}</td>
-                  {/* <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.pocDesignation}</td> */}
-                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.contactNo}</td>
-                  {/* <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.personOfContact2}</td> */}
-                  {/* <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.contactNo2}</td> */}
+                  <td className={record.nextFollowUp<=formattedDate && record.nextFollowUp!=''?'bg-danger':''}>{index + 1}</td>
+                  <td className={record.nextFollowUp<=formattedDate && record.nextFollowUp!=''?'bg-danger':''}>{record.institutionName}</td>
+                  <td className={record.nextFollowUp<=formattedDate && record.nextFollowUp!=''?'bg-danger':''}>{record.place}</td>
+                  {/* <td className={record.nextFollowUp<=formattedDate && record.nextFollowUp!=''?'bg-danger':''}>{record.country}</td> */}
+                  <td className={record.nextFollowUp<=formattedDate && record.nextFollowUp!=''?'bg-danger':''}>{record.personOfContact}</td>
+                  {/* <td className={record.nextFollowUp<=formattedDate && record.nextFollowUp!=''?'bg-danger':''}>{record.pocDesignation}</td> */}
+                  <td className={record.nextFollowUp<=formattedDate && record.nextFollowUp!=''?'bg-danger':''}>{record.contactNo}</td>
+                  {/* <td className={record.nextFollowUp<=formattedDate && record.nextFollowUp!=''?'bg-danger':''}>{record.personOfContact2}</td> */}
+                  {/* <td className={record.nextFollowUp<=formattedDate && record.nextFollowUp!=''?'bg-danger':''}>{record.contactNo2}</td> */}
 
-                  {/* <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.referralPerson}</td> */}
-                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.email}</td>
-                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{BDAnames[index] || 'loading...'}</td>
-                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.currentStatus}</td>
-                  {/* <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.fPrice}</td> */}
-                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.lPrice}</td>
-                  {/* <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.lastContacted}</td> */}
-                  <td className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.nextFollowUp}</td>
-                  {/* <td id='remarkTD' className={record.nextFollowUp<=formattedDate?'bg-danger':''}>{record.remarks}</td> */}
+                  {/* <td className={record.nextFollowUp<=formattedDate && record.nextFollowUp!=''?'bg-danger':''}>{record.referralPerson}</td> */}
+                  <td className={record.nextFollowUp<=formattedDate && record.nextFollowUp!=''?'bg-danger':''}>{record.email}</td>
+                  <td className={record.nextFollowUp<=formattedDate && record.nextFollowUp!=''?'bg-danger':''}>{BDAnames[index] || 'loading...'}</td>
+                  <td className={record.nextFollowUp<=formattedDate && record.nextFollowUp!=''?'bg-danger':''}>{record.currentStatus}</td>
+                  {/* <td className={record.nextFollowUp<=formattedDate && record.nextFollowUp!=''?'bg-danger':''}>{record.fPrice}</td> */}
+                  <td className={record.nextFollowUp<=formattedDate && record.nextFollowUp!=''?'bg-danger':''}>{record.lPrice}</td>
+                  {/* <td className={record.nextFollowUp<=formattedDate && record.nextFollowUp!=''?'bg-danger':''}>{record.lastContacted}</td> */}
+                  <td className={record.nextFollowUp<=formattedDate && record.nextFollowUp!=''?'bg-danger':''}>{record.nextFollowUp}</td>
+                  {/* <td id='remarkTD' className={record.nextFollowUp<=formattedDate && record.nextFollowUp!=''?'bg-danger':''}>{record.remarks}</td> */}
                 </tr>
               ))
             ) : (

@@ -6,7 +6,7 @@
 }
 .recordsTable{
     width: 95%;
-    margin: 2%;
+    margin: 0.5% 2%;
     background-color: rgb(179, 180, 182);
     
 }
@@ -49,4 +49,13 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+.tableSelect select{
+    padding: 0.5%;
+    margin-left: 2%;
+}
+.tableSelect{
+    width: 90%;
+    display: flex;
+    justify-content: right;
 }

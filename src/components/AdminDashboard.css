@@ -12,6 +12,6 @@
 .dashMain p{
     background-color: rgb(27, 79, 138);
     align-self: center;
-    padding: 20px 10px;
-    border-radius: 55px;
+    padding: 10px 10px;
+    border-radius: 5px;
 }
